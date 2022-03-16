@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-md-3 col-from-label">{{translate('Product Name')}}</label>
+                        <label class="col-md-3 col-from-label">{{translate('Product Name')}} <span class="text-danger">*</span></label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="name"
                                 placeholder="{{ translate('Product Name') }}" onchange="update_sku()" required>
@@ -54,14 +54,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-from-label">{{translate('Unit')}}</label>
+                        <label class="col-md-3 col-from-label">{{translate('Unit')}} <span class="text-danger">*</span></label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="unit"
                                 placeholder="{{ translate('Unit (e.g. KG, Pc etc)') }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-from-label">{{translate('Minimum Purchase Qty')}}</label>
+                        <label class="col-md-3 col-from-label">{{translate('Minimum Purchase Qty')}} <span class="text-danger">*</span></label>
                         <div class="col-md-8">
                             <input type="number" lang="en" class="form-control" name="min_qty" value="1" min="1"
                                 required>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="signinSrEmail">{{translate('Thumbnail Image')}}
-                            <small>(290x300)</small></label>
+                            <small>(290x300)</small> <span class="text-danger">*</span></label>
                         <div class="col-md-8">
                             <div class="input-group" data-toggle="aizuploader" data-type="image">
                                 <div class="input-group-prepend">
@@ -218,7 +218,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-md-3 col-from-label">{{translate('Unit price')}}</label>
+                        <label class="col-md-3 col-from-label">{{translate('Unit price')}} <span class="text-danger">*</span></label>
                         <div class="col-md-6">
                             <input type="number" lang="en" min="0" value="0" step="0.01"
                                 placeholder="{{ translate('Unit price') }}" name="unit_price" class="form-control"
@@ -234,7 +234,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-from-label">{{translate('Discount')}}</label>
+                        <label class="col-md-3 col-from-label">{{translate('Discount')}} <span class="text-danger">*</span></label>
                         <div class="col-md-6">
                             <input type="number" lang="en" min="0" value="0" step="0.01"
                                 placeholder="{{ translate('Discount') }}" name="discount" class="form-control" required>
@@ -249,7 +249,7 @@
 
                     <div id="show-hide-div">
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Quantity')}}</label>
+                            <label class="col-md-3 col-from-label">{{translate('Quantity')}} <span class="text-danger">*</span></label>
                             <div class="col-md-6">
                                 <input type="number" lang="en" min="0" value="0" step="1"
                                     placeholder="{{ translate('Quantity') }}" name="current_stock" class="form-control"

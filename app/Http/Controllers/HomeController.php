@@ -41,7 +41,7 @@ class HomeController extends Controller
         });
 
         $todays_deal_products = Cache::rememberForever('todays_deal_products', function () {
-            return filter_products(Product::where('published', 1)->where('todays_deal', '1'))->get();            
+            return filter_products(Product::where('published', 1)->where('todays_deal', '1'))->get();
         });
 
         $newest_products = Cache::remember('newest_products', 3600, function () {
@@ -87,13 +87,21 @@ class HomeController extends Controller
     public function cart_login(Request $request)
     {
         $user = null;
-        if($request->get('phone') != null){
-            $user = User::whereIn('user_type', ['customer', 'seller'])->where('phone', "+{$request['country_code']}{$request['phone']}")->first();
+//        if($request->get('phone') != null){
+//            $user = User::whereIn('user_type', ['customer', 'seller'])->where('phone', "+{88}{$request['phone']}")->first();
+//        }
+//        elseif($request->get('email') != null){
+//            $user = User::whereIn('user_type', ['customer', 'seller'])->where('email', $request->email)->first();
+//        }
+
+        if(is_numeric($request->get('email'))){
+            $user = User::whereIn('user_type', ['customer', 'seller'])->where('phone', "+88{$request['email']}")->first();
         }
-        elseif($request->get('email') != null){
+        elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
             $user = User::whereIn('user_type', ['customer', 'seller'])->where('email', $request->email)->first();
         }
-        
+//        dd($user);
+
         if($user != null){
             if(Hash::check($request->password, $user->password)){
                 if($request->has('remember')){
@@ -172,7 +180,7 @@ class HomeController extends Controller
         if($request->new_password != null && ($request->new_password == $request->confirm_password)){
             $user->password = Hash::make($request->new_password);
         }
-        
+
         $user->avatar_original = $request->photo;
 
         $seller = $user->seller;

@@ -122,6 +122,30 @@ class OTPVerificationController extends Controller
      * @param  Order $order
      * @return void
      */
+    public function send_order_code_seller($order){
+
+        if ($order->seller_id == \App\Models\User::where('user_type', 'admin')->first()->id) {
+            $phone = \App\Models\User::where('user_type', 'admin')->first()->phone;
+        } else {
+            $phone = '+88'.$order->seller->phone;
+        }
+
+        if($phone != null){
+
+            SmsUtility::order_placement($phone, $order);
+        }
+    }
+    public function send_order_code_admin($order){
+        if ($order->seller_id != \App\Models\User::where('user_type', 'admin')->first()->id) {
+            $phone = \App\Models\User::where('user_type', 'admin')->first()->phone;
+            SmsUtility::order_placement($phone, $order);
+        }
+    }
+
+    /**
+     * @param  Order $order
+     * @return void
+     */
     public function send_delivery_status($order){
         $phone = json_decode($order->shipping_address)->phone;
         if($phone != null){

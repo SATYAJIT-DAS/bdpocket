@@ -35,10 +35,12 @@ class SmsUtility
 
     public static function order_placement($phone='', $order='')
     {
+
         $sms_template   = SmsTemplate::where('identifier','order_placement')->first();
         $sms_body       = $sms_template->sms_body;
         $sms_body       = str_replace('[[order_code]]', $order->code, $sms_body);
         $template_id    = $sms_template->template_id;
+//        dd($phone, env('APP_NAME'), $sms_body, $template_id);
         try {
             sendSMS($phone, env('APP_NAME'), $sms_body, $template_id);
         } catch (\Exception $e) {

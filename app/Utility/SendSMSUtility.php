@@ -9,8 +9,38 @@ use Twilio\Rest\Client;
 class SendSMSUtility
 {
     public static function sendSMS($to, $from, $text, $template_id)
-    {        
-        if (OtpConfiguration::where('type', 'nexmo')->first()->value == 1) {
+    {
+
+        if (OtpConfiguration::where('type', 'mohasagor_sms')->first()->value == 1) {
+    //            dd($to,$from, $text, $template_id);
+            $api_key = env("MOHASAGOR_SMS_API_KEY");
+            $type = env("MOHASAGOR_SMS_TYPE");
+            $label = env("MOHASAGOR_SMS_LABEL");
+            $sender_id = env("MOHASAGOR_SMS_SID");
+
+            $url = env("MOHASAGOR_SMS_URL");
+    //            "msg" => "$text",
+            $data = [
+                "api_key" => $api_key,
+                "type" => "$type",
+                "contacts" => "$to",
+                "senderid" => "$sender_id",
+                "msg" => "$text",
+            ];
+    //            dd($data,$url);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
+//            dd($response);
+            return $response;
+
+        } elseif (OtpConfiguration::where('type', 'nexmo')->first()->value == 1) {
             $api_key = env("NEXMO_KEY"); //put ssl provided api_token here
             $api_secret = env("NEXMO_SECRET"); // put ssl provided sid here
 

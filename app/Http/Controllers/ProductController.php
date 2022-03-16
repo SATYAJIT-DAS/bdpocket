@@ -21,6 +21,7 @@ use Combinations;
 use Artisan;
 use Cache;
 use Str;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -168,6 +169,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'thumbnail_img' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            flash(translate('Add Thumbnail Image'))->error();
+            if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff') {
+                return redirect()->route('products.create');
+            } else {
+                if (addon_is_activated('seller_subscription')) {
+                    $seller = Auth::user()->seller;
+                    $seller->remaining_uploads -= 1;
+                    $seller->save();
+                }
+                return redirect()->route('seller.products.upload');
+            }
+        }
         $product = new Product;
         $product->name = $request->name;
         $product->added_by = $request->added_by;
@@ -422,6 +441,7 @@ class ProductController extends Controller
         $product_translation->save();
 
         flash(translate('Product has been inserted successfully'))->success();
+
 
         Artisan::call('view:clear');
         Artisan::call('cache:clear');

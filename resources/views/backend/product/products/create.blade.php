@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Unit')}}</label>
+                            <label class="col-md-3 col-from-label">{{translate('Unit')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" name="unit" placeholder="{{ translate('Unit (e.g. KG, Pc etc)') }}" required>
                             </div>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Tags')}} <span class="text-danger">*</span></label>
+                            <label class="col-md-3 col-from-label">{{translate('Tags')}} </label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control aiz-tag-input" name="tags[]" placeholder="{{ translate('Type and hit enter to add a tag') }}">
                                 <small class="text-muted">{{translate('This is used for search. Input those words by which cutomer can find this product.')}}</small>
@@ -108,14 +108,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="signinSrEmail">{{translate('Thumbnail Image')}} <small>(300x300)</small></label>
+                            <label class="col-md-3 col-form-label" for="signinSrEmail">{{translate('Thumbnail Image')}} <small>(300x300)</small> <span class="text-danger">*</span></label>
                             <div class="col-md-8">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-soft-secondary font-weight-medium">{{ translate('Browse')}}</div>
                                     </div>
                                     <div class="form-control file-amount">{{ translate('Choose File') }}</div>
-                                    <input type="hidden" name="thumbnail_img" class="selected-files">
+                                    <input type="hidden" name="thumbnail_img" class="selected-files " >
                                 </div>
                                 <div class="file-preview box sm">
                                 </div>
@@ -639,6 +639,9 @@
 @section('script')
 
 <script type="text/javascript">
+    document.getElementById(
+        "myFile").required;
+    $()
     $('form').bind('submit', function (e) {
 		if ( $(".action-btn").attr('attempted') == 'true' ) {
 			//stop submitting the form because we have already clicked submit.
@@ -649,17 +652,17 @@
 		}
         // Disable the submit button while evaluating if the form should be submitted
         // $("button[type='submit']").prop('disabled', true);
-        
+
         // var valid = true;
 
         // if (!valid) {
             // e.preventDefault();
-            
+
             ////Reactivate the button if the form was not submitted
             // $("button[type='submit']").button.prop('disabled', false);
         // }
     });
-    
+
     $("[name=shipping_type]").on("change", function (){
         $(".flat_rate_shipping_div").hide();
 
