@@ -1148,7 +1148,7 @@ $.fn.toggleAttr = function (attr, attr1, attr2) {
                     modes: [
                         'picture',
                     ],
-                    mirror: true,
+                    mirror: false,
                     videoConstraints: {
                         facingMode: 'environment',
                       },
