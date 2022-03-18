@@ -10,7 +10,7 @@ class OTPController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function configure_index()
     {
@@ -20,11 +20,22 @@ class OTPController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function credentials_index()
     {
         return view('otp_systems.configurations.index');
+    }
+
+    /**
+     * Display Resource to add admin Phone
+     *
+     *
+     */
+
+    public function admin_phone_index()
+    {
+        return  view('otp_systems.configurations.admin_phone');
     }
 
     /**

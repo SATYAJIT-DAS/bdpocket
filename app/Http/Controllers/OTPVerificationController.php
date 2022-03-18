@@ -124,22 +124,25 @@ class OTPVerificationController extends Controller
      */
     public function send_order_code_seller($order){
 
-        if ($order->seller_id == \App\Models\User::where('user_type', 'admin')->first()->id) {
-            $phone = \App\Models\User::where('user_type', 'admin')->first()->phone;
-        } else {
+//        if ($order->seller_id == \App\Models\User::where('user_type', 'admin')->first()->id && \App\Models\OtpConfiguration::where('type', 'admin_phone')->first()->value != null) {
+//            $phone = \App\Models\OtpConfiguration::where('type', 'admin_phone')->first()->value;
+//        } else {
+//            $phone = '+88'.$order->seller->phone;
+//        }
+
+        if ($order->seller_id != \App\Models\User::where('user_type', 'admin')->first()->id){
             $phone = '+88'.$order->seller->phone;
         }
-
         if($phone != null){
-
             SmsUtility::order_placement($phone, $order);
         }
     }
     public function send_order_code_admin($order){
-        if ($order->seller_id != \App\Models\User::where('user_type', 'admin')->first()->id) {
-            $phone = \App\Models\User::where('user_type', 'admin')->first()->phone;
+        if ($order->seller_id != \App\Models\User::where('user_type', 'admin')->first()->id && \App\Models\OtpConfiguration::where('type', 'admin_phone')->first()->value != null){
+            $phone = \App\Models\OtpConfiguration::where('type', 'admin_phone')->first()->value;
             SmsUtility::order_placement($phone, $order);
         }
+
     }
 
     /**

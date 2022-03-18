@@ -33,4 +33,7 @@ Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'admin']], function()
     Route::post('/sms-send', 'SmsController@send')->name('sms.send');
 
     Route::resource('/sms-templates','SmsTemplateController');
+
+    //add admin phone number
+    Route::get("/otp-configuration/admin-phone",'OTPController@admin_phone_index')->name("otp_credentials.admin_phone");
 });

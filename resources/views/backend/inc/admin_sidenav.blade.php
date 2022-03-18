@@ -759,6 +759,11 @@
                                         <span class="aiz-side-nav-text">{{translate('Set OTP Credentials')}}</span>
                                     </a>
                                 </li>
+                                <li class="aiz-side-nav-item">
+                                    <a href="{{route('otp_credentials.admin_phone')}}" class="aiz-side-nav-link">
+                                        <span class="aiz-side-nav-text"> Add Admin Phone Number</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     @endif

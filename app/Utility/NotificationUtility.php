@@ -10,6 +10,7 @@ use Mail;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrderNotification;
 use App\Models\FirebaseNotification;
+use App\Models\OtpConfiguration;
 
 class NotificationUtility
 {
@@ -32,7 +33,9 @@ class NotificationUtility
                 $otpController = new OTPVerificationController;
                 $otpController->send_order_code($order);
                 $otpController->send_order_code_seller($order);
-                $otpController->send_order_code_admin($order);
+                if(\App\Models\OtpConfiguration::where('type', 'admin_oder_sms_activaton')->first()->value == 1){
+                    $otpController->send_order_code_admin($order);
+                }
             } catch (\Exception $e) {
 
             }
