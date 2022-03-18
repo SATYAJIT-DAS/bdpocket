@@ -181,7 +181,8 @@
                             @csrf
                             @if (addon_is_activated('otp_system') && env("DEMO_MODE") != "On")
                                 <div class="form-group email-form-group mb-1 ">
-                                    <input type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{  translate('Email') }}" name="email" id="email" autocomplete="off">
+                                    <label>Phone OR Email <span class="text-primary">*</span></label>
+                                    <input type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="01********* OR Email" name="email" id="email" autocomplete="off">
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('email') }}</strong></span>
                                     @endif
@@ -198,6 +199,7 @@
                             @endif
 
                             <div class="form-group">
+                                <label>Password <span class="text-primary">*</span></label>
                                 <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ translate('Password')}}" name="password" id="password">
                             </div>
 

@@ -122,7 +122,7 @@ class OTPVerificationController extends Controller
      * @param  Order $order
      * @return void
      */
-    public function  send_order_code_seller($order){
+    public function send_order_code_seller($order){
 
         if ($order->seller_id == \App\Models\User::where('user_type', 'admin')->first()->id) {
             $phone = \App\Models\User::where('user_type', 'admin')->first()->phone;

@@ -18,12 +18,10 @@
                                     <form class="form-default" role="form" action="{{ route('login') }}" method="POST">
                                         @csrf
                                         @if (addon_is_activated('otp_system') && env("DEMO_MODE") != "On")
-                                            <!-- <div class="form-group phone-form-group mb-1">
-                                                <input type="tel" id="phone-code" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" value="{{ old('phone') }}" placeholder="" name="phone" autocomplete="off">
-                                            </div> -->
 
                                             <div class="form-group email-form-group mb-1 ">
-                                                <input type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{  translate('Email') }}" name="email" id="email" autocomplete="off">
+                                                <label>Phone OR Email <span class="text-primary">*</span></label>
+                                                <input type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="01********* OR Email" name="email" id="email" autocomplete="off">
                                                 @if ($errors->has('email'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('email') }}</strong>
@@ -32,6 +30,7 @@
                                             </div>
                                         @else
                                             <div class="form-group">
+                                                <label>Phone OR Email <span class="text-primary">*</span></label>
                                                 <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{  translate('Email') }}" name="email" id="email" autocomplete="off">
                                                 @if ($errors->has('email'))
                                                     <span class="invalid-feedback" role="alert">
@@ -42,6 +41,7 @@
                                         @endif
 
                                         <div class="form-group">
+                                            <label>Password <span class="text-primary">*</span></label>
                                             <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ translate('Password')}}" name="password" id="password">
                                         </div>
 
@@ -63,7 +63,7 @@
                                         </div>
                                     </form>
 
-                                    
+
 
                                     @if(get_setting('google_login') == 1 || get_setting('facebook_login') == 1 || get_setting('twitter_login') == 1)
                                         <div class="separator mb-3">
@@ -109,6 +109,6 @@
 
 @section('script')
     <script type="text/javascript">
-     
+
     </script>
 @endsection
