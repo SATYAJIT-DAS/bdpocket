@@ -76,6 +76,9 @@ class ShopController extends Controller
                 $user->customer->delete();
             }
             $user->user_type = "seller";
+            if($user->email== NULL){
+                $user->email = $request->email;
+            }
             $user->save();
         }
 
@@ -88,6 +91,7 @@ class ShopController extends Controller
             $shop->user_id = $user->id;
             $shop->name = $request->name;
             $shop->address = $request->address;
+            $shop->phone = $request->phone;
             $shop->slug = preg_replace('/\s+/', '-', $request->name);
 
             if ($shop->save()) {

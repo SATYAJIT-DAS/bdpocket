@@ -60,6 +60,16 @@
                                 <label>{{ translate('Shop Name')}} <span class="text-primary">*</span></label>
                                 <input type="text" class="form-control" placeholder="{{ translate('Shop Name')}}" name="name" required>
                             </div>
+                            @if(Auth::check() && Auth::user()->email== NULL)
+                                <div class="form-group">
+                                    <label>{{ translate('email')}} <span class="text-primary">*</span></label>
+                                    <input type="email" class="form-control mb-3" placeholder="{{ translate('email')}}" name="email" required>
+                                </div>
+                            @endif
+                            <div class="form-group">
+                                <label>{{ translate('phone')}} <span class="text-primary">*</span></label>
+                                <input type="number" class="form-control mb-3" placeholder="01*********" name="phone" required>
+                            </div>
                             <div class="form-group">
                                 <label>{{ translate('Address')}} <span class="text-primary">*</span></label>
                                 <input type="text" class="form-control mb-3" placeholder="{{ translate('Address')}}" name="address" required>
